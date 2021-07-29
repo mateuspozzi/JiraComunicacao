@@ -22,15 +22,14 @@ namespace JiraComunicacao.Controllers
             //Criptografar em Base64 encode o email usuario e token ex: teste@teste.com:token gerado no site do Jira 
             //onde gera o token
             //https://id.atlassian.com/manage-profile/security/api-tokens
-            request.AddHeader("Authorization", "Basic tokenGerado");
+            request.AddHeader("Authorization", "Basic tokenTeste");
             request.AddHeader("Content-Type", "application/json");
-            //request.AddHeader("Cookie", "atlassian.xsrf.token=2c1598cd-3610-4bd9-bd43-26bcf448b770_42e9323f5c442620b3e09f372cd874aa0dd6b359_lin");
 
             JiraDTO card = new JiraDTO
             {
                 Fields = new JiraFieldsDTO
                 {
-                    Project = new JiraProjectDTO { Key = "MOD" },
+                    Project = new JiraProjectDTO { Key = "SOL" },
                     Summary = campos.Titulo,
 
                     Description = new JiraDescriptionDTO
@@ -42,7 +41,7 @@ namespace JiraComunicacao.Controllers
                             Content = new List<JiraContentDTO>{ new JiraContentDTO { Type = "text", Text = campos.Descricao } }
                         }},
                     },
-
+                    //bug
                     IssueType = new JiraIssueTypeDTO { Id = 10006 }
                 }
             };
@@ -62,7 +61,7 @@ namespace JiraComunicacao.Controllers
             var client = new RestClient($"https://projeto-teste-teste.atlassian.net/rest/api/3/issue/{chaveOuId}?fields=status");
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
-            request.AddHeader("Authorization", "Basic tokenGerado");
+            request.AddHeader("Authorization", "Basic tokenTeste");
             request.AddHeader("Content-Type", "application/json");
 
             IRestResponse response = client.Execute(request);
